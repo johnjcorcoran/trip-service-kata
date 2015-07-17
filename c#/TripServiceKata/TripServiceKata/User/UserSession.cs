@@ -1,6 +1,6 @@
 ﻿using TripServiceKata.Exception;
 
-namespace TripServiceKata.User
+namespace TripServiceKata.UserNS
 {
     public class UserSession
     {
