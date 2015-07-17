@@ -3,12 +3,12 @@ namespace TripServiceKata.Trip
 {
 	public interface IUserRetriever
 	{
-		User GetLoggedUser();
+		User GetLoggedInUser();
 	}
 
 	public class UserRetriever : IUserRetriever
 	{
-		public User GetLoggedUser()
+		public User GetLoggedInUser()
 		{
 			return UserNS.UserSession.GetInstance().GetLoggedUser();
 		}

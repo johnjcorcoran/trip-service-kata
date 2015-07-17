@@ -7,30 +7,30 @@ namespace TripServiceKata.Trip
 	public class TripService
 	{
 		private readonly IUserRetriever _userRetriever;
-		private readonly ITripDao _tripDaoWrapper;
+		private readonly ITripRepository _tripRepository;
 
-		public TripService(IUserRetriever userRetriever, ITripDao tripDao)
+		public TripService(IUserRetriever userRetriever, ITripRepository tripRepository)
 		{
 			_userRetriever = userRetriever;
-			_tripDaoWrapper = tripDao;
+			_tripRepository = tripRepository;
 		}
 
 		public List<Trip> GetTripsByUser(User friend)
 		{
-			var loggedUser = GetLoggedUser();
-			if (loggedUser == null)
+			var loggedInUser = _userRetriever.GetLoggedInUser();
+			if (loggedInUser == null)
 			{
 				throw new UserNotLoggedInException();
 			}
 
-			return Enumerable.Contains(friend.GetFriends(), loggedUser) 
-				? _tripDaoWrapper.GetTripsFor(friend)
+			return AreFriends(friend, loggedInUser)
+				? _tripRepository.GetTripsFor(friend)
 				: new List<Trip>();
 		}
 
-		private User GetLoggedUser()
+		private static bool AreFriends(User friend, User loggedUser)
 		{
-			return _userRetriever.GetLoggedUser();
+			return Enumerable.Contains(friend.GetFriends(), loggedUser);
 		}
 	}
 }

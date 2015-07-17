@@ -2,12 +2,12 @@
 
 namespace TripServiceKata.Trip
 {
-	public interface ITripDao
+	public interface ITripRepository
 	{
 		List<Trip> GetTripsFor(User user);
 	}
 
-	public class TripDaoWrapper : ITripDao
+	public class TripRepositoryWrapper : ITripRepository
 	{
 		public List<Trip> GetTripsFor(User user)
 		{

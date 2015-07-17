@@ -6,7 +6,7 @@ using TripServiceKata.Trip;
 
 namespace TripServiceKata.Tests
 {
-	public class TripServiceTest : IUserRetriever, ITripDao
+	public class TripServiceTest : IUserRetriever, ITripRepository
 	{
 		private User _loggedIUser;
 		private TripService _tripService;
@@ -66,7 +66,7 @@ namespace TripServiceKata.Tests
 
 		}
 
-		public User GetLoggedUser()
+		public User GetLoggedInUser()
 		{
 			return _loggedIUser;
 		}
